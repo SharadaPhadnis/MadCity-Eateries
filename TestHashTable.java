@@ -97,7 +97,7 @@ public class TestHashTable {
     }
 
     /**
-     * This test the grow, containsKey methods, and getIndex.
+     * This test the grow and containsKey methods
      * @return true if all tests pass
      */
     public static boolean test5() {
@@ -114,10 +114,6 @@ public class TestHashTable {
         }
         //testing containsKey on a valid and invalid key
         if((!trial5.containsKey("D")) || (trial5.containsKey("Z"))){
-            return false;
-        }
-        //testing to check getIndex and array length after growth
-        if(("D".hashCode() % 6) != trial5.getIndex("D")){
             return false;
         }
         return true;
@@ -167,12 +163,8 @@ public class TestHashTable {
             System.out.println("CSVFileTests 6 Failed.");
             return false;
         }
-        //7. Tests collisions and getIndex
+        //7. Tests collisions
         if(!(csvHashMap.get("5638293").equals("BBQ Express")) || !(csvHashMap.get("9516413").equals("Flavoroso"))){
-            System.out.println("CSVFileTests 7 Failed.");
-            return false;
-        }
-        if((csvHashMap.getIndex("9516413") != csvHashMap.getIndex("5638293"))){
             System.out.println("CSVFileTests 7 Failed.");
             return false;
         }
