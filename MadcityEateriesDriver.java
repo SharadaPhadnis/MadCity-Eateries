@@ -10,43 +10,100 @@
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * The MadcityEateriesDriver implemented an application for users to access the name of the 
+ * restaurant they want to search.
+ * 
+ * @author Sihan Ren
+ *
+ */
 public class MadcityEateriesDriver {
   private final static String WELCOME_PAGE = "~~~~~~~~~~~Welcome to MadcityEateries!~~~~~~~~~~~~";
+  // The first line of the application interface design
   private final static String FINISH_PAGE =
       "~~~~~~~~~~~~ Thank you for MadcityEateries! See you next time!~~~~~~~~~~~~";
-  private static String command;
+  // The end line of the application interface design 
+  private static String command; // the command sentence that users will input
+  private static ReadData getData; // get the data from the data wranglers and store them in the hash table 
+  
+  /*public static void driverForOwners() {
+    Scanner scanner = new Scanner(System.in);
+    command = "";
+    while (!command.contentEquals("no")) {
+      System.out.println("Choose the option you would like to do: [add / remove]");
+      command = scanner.nextLine().trim();
+      if (command.equals("add")) {
+        System.out.println(
+            "Type the phone numbers of your restaurant and its name splitted with a space here: ");
+        command = scanner.next().trim();
+        String insertKey = command;
+        String insertValue = scanner.next().trim();
+        System.out.println(insertKey);
+        System.out.println(insertValue);
+        System.out.println(getData.hashMap.put(insertKey, insertValue));
+        if (getData.hashMap.put(insertKey, insertValue) == true) {
+          System.out.println("Congratulations! You have added your restaurant successfully!");
+          break;
+        } else {
+          System.out
+              .println("Sorry, the restaurant has already in our app. Try that again? [yes / no]");
+          command = scanner.next().trim();
+        }
+      }
+    }
+  }*/
+
+  /**
+   * The method is used to get the name of the restaurants when users use the search function
+   * 
+   * @param scanner scan the input commands from the users
+   * @param time the current time of users based on the hour
+   */
   public static void driverForUsers() {
     try {
-      ReadData getData = new ReadData();
-      //getData.storeData();
+      getData = new ReadData();
       Scanner scanner = new Scanner(System.in);
       command = "";
-      while (!command.equals("no")) {
-        System.out.println("Enter your current time to check restaurants' availablity: ");
-        command = scanner.nextLine().trim();
-        int time = Integer.parseInt(command);
-        if (time > 22) {
-          System.out.println("Sorry that restaurants are closed now.\n");
-        } else {
-          System.out.println("Enter the phone numbers of the restaurant you want to search: ");
-          command = scanner.nextLine().trim();
-          long inputNumber = Long.parseLong(command);
-          System.out.println("!: "+inputNumber);
-          System.out.println("get: "+ getData.hashMap.get(inputNumber));
-          if (getData.hashMap.get(inputNumber) != null) {
-            System.out.println("Your restaurant name is: " + getData.hashMap.get(inputNumber));
-          }
-        }
-        System.out.println("Do you want to search other restaurants? [yes / no]");
-        command = scanner.nextLine().trim();
+      System.out.println("Enter your current time to check restaurants' availablity: ");
+      command = scanner.nextLine().trim();
+      int time = Integer.parseInt(command);
+      if (time > 22 || time < 9) {
+        System.out.println("Sorry that restaurants are closed now.\n");
       }
+      // users enter their time currently to check whether the restaurants are closed, we assume that
+      // all the restaurants are closed during 22pm to 9am
+      else {
+        while (!command.contentEquals("no")) {
+          System.out.println("Enter the phone numbers of the restaurant you want to search: ");
+          command = scanner.nextLine().trim(); // get the key of the hashtable from the users
+          if (getData.hashMap.get(command) != null) {
+            System.out.println("Your restaurant name is: " + getData.hashMap.get(command));
+          } // use the get() method in hashTableMap and output the correct restaurant's name
+          System.out.println("Do you want to search other restaurants? [yes / no]");
+          command = scanner.nextLine().trim(); // Ask users if they would like to continue searching
+        }
+      }
+
+
     } catch (NoSuchElementException e) {
-      if (e.getMessage() != null && e.getMessage().toLowerCase().contains("no such element")) {
+      if (e.getMessage() != null && e.getMessage().toLowerCase().contains("cannot be found")) {
         System.out.println(e.getMessage());
+        // Tell the users that the phone numbers cannot be found now
+        System.out.println("Do you want to search other restaurants? [yes / no]");
+        Scanner scanner = new Scanner(System.in);
+        command = scanner.nextLine().trim();
+        if(command.equals("yes")) {
+          driverForUsers();
+        }
+        // if users would like to continuing searching, return to the beginning of the method
       }
     }
   }
 
+  /**
+   * Main method for the application to run the whole program
+   * @param args input arguments if any
+   */
   public static void main(String[] args) {
     System.out.println(WELCOME_PAGE);
     driverForUsers();
