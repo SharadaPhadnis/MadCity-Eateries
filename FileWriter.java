@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class FileWriter {
 	
 	//HashTableMap object with Long and String generic types because those are the two types of variables we will be storing the name and number with
-	static HashTableMap<Long, String> hashMap = new HashTableMap<Long, String>();
+	static HashTableMap<String, String> hashMap = new HashTableMap<String, String>();
 	
 	public static void main(String[] args) throws IOException, FileNotFoundException {
 		
@@ -50,11 +50,8 @@ public class FileWriter {
 			 //because the numbers were too big to store in a variable so we got rid of the area code
 			 restaurantNumber = restaurantNumber.substring(3);
 			 
-			 //parses the character sequence--We realized long was the only variable type appropriate to store a value this large
-			 long phone = Long.parseLong(restaurantNumber);
-			 
 			 //used our generic put method to add it to the hashMap
-			 hashMap.put(phone, restaurantName);
+			 hashMap.put(restaurantNumber, restaurantName);
 		 }
 	}
 	
