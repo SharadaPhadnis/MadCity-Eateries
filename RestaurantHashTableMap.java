@@ -8,7 +8,7 @@
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
-public class RestaurantHashTableMap<Long, String> implements RestaurantMapADT<Long, String> {
+public class RestaurantHashTableMap<K, V> implements RestaurantMapADT<K, V> {
 	private int capacity;
 	private int size;
 	private LinkedList<RestaurantPair>[] list;
@@ -35,7 +35,7 @@ public class RestaurantHashTableMap<Long, String> implements RestaurantMapADT<Lo
 	 * @param key and value
 	 * @return true if key-value pair was sucessfully added and false otherwise
 	 */
-	public boolean put(Long key, String value) {
+	public boolean put(K key, V value) {
 		
 		if(containsKey(key)) {
 			return false;
@@ -97,8 +97,8 @@ public class RestaurantHashTableMap<Long, String> implements RestaurantMapADT<Lo
 			if(list[i] != null) {
 				//traversing through the linkedlist at each point index of list[i]
 				for(int j=0; j<list[i].size(); j++) {
-					Long keyToHash = (Long)list[i].get(j).getKey();
-					String value = (String)list[i].get(j).getVal();
+					K keyToHash = (K)list[i].get(j).getKey();
+					V value = (V)list[i].get(j).getVal();
 					int indexHashed = keyToHash.hashCode();
 					indexHashed = (int) (Math.abs(indexHashed) % capacity);
 					if(myList[indexHashed] == null) {
@@ -124,7 +124,7 @@ public class RestaurantHashTableMap<Long, String> implements RestaurantMapADT<Lo
 	 * @throws NoSuchElementException if the key does not exist in the 
 	 * array
 	 */
-	public String get(Long key) throws NoSuchElementException {
+	public V get(K key) throws NoSuchElementException {
 		if(!containsKey(key)) {
 			throw new NoSuchElementException("Key not found!");
 		}
@@ -134,7 +134,7 @@ public class RestaurantHashTableMap<Long, String> implements RestaurantMapADT<Lo
 				//traverse through the linked list
 				for(int j=0; j<list[i].size(); j++) {
 					if(list[i].get(j).getKey().equals(key)) {
-						return (String) list[i].get(j).getVal();
+						return (V) list[i].get(j).getVal();
 					}
 				}
 			}
@@ -152,7 +152,7 @@ public class RestaurantHashTableMap<Long, String> implements RestaurantMapADT<Lo
 		return size;
 	}
 	@Override
-	public boolean containsKey(Long key) {
+	public boolean containsKey(K key) {
 		/**for(int i=0; i<list.length; i++) {
 			if(list[i]!= null && list[i].contains(key)) {
 				return true;
@@ -183,7 +183,7 @@ public class RestaurantHashTableMap<Long, String> implements RestaurantMapADT<Lo
 	 * returns V- the value associated with the key to be removed
 	 * null - if the key does not exist in the list
 	 */
-	public String remove(Long key) {
+	public V remove(K key) {
 		if(!containsKey(key)) {
 			return null;
 		}
@@ -195,7 +195,7 @@ public class RestaurantHashTableMap<Long, String> implements RestaurantMapADT<Lo
 					if(list[i].get(j).getKey().equals(key)) {
 						RestaurantPair toRemove = list[i].remove(j);
 						size--;
-						return (String) toRemove.getVal();
+						return (V) toRemove.getVal();
 				
 					}
 				}
@@ -220,6 +220,7 @@ public class RestaurantHashTableMap<Long, String> implements RestaurantMapADT<Lo
 		java.lang.String toReturn =  "";
 		
 		for(int i=0; i<capacity; i++) {
+			System.out.println("hi");
 			if(list[i] != null) {
 				//traversing through the linkedlists
 				for(int j=0; j<list[i].size(); j++) {
@@ -227,7 +228,7 @@ public class RestaurantHashTableMap<Long, String> implements RestaurantMapADT<Lo
 				}
 			}
 		}
-		System.out.println(capacity);
+		
 		return toReturn;
 		
 	}
