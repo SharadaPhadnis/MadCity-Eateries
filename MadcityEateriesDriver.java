@@ -25,33 +25,6 @@ public class MadcityEateriesDriver {
   // The end line of the application interface design 
   private static String command; // the command sentence that users will input
   private static ReadData getData; // get the data from the data wranglers and store them in the hash table 
-  
-  /*public static void driverForOwners() {
-    Scanner scanner = new Scanner(System.in);
-    command = "";
-    while (!command.contentEquals("no")) {
-      System.out.println("Choose the option you would like to do: [add / remove]");
-      command = scanner.nextLine().trim();
-      if (command.equals("add")) {
-        System.out.println(
-            "Type the phone numbers of your restaurant and its name splitted with a space here: ");
-        command = scanner.next().trim();
-        String insertKey = command;
-        String insertValue = scanner.next().trim();
-        System.out.println(insertKey);
-        System.out.println(insertValue);
-        System.out.println(getData.hashMap.put(insertKey, insertValue));
-        if (getData.hashMap.put(insertKey, insertValue) == true) {
-          System.out.println("Congratulations! You have added your restaurant successfully!");
-          break;
-        } else {
-          System.out
-              .println("Sorry, the restaurant has already in our app. Try that again? [yes / no]");
-          command = scanner.next().trim();
-        }
-      }
-    }
-  }*/
 
   /**
    * The method is used to get the name of the restaurants when users use the search function
@@ -86,7 +59,7 @@ public class MadcityEateriesDriver {
 
 
     } catch (NoSuchElementException e) {
-      if (e.getMessage() != null && e.getMessage().toLowerCase().contains("cannot be found")) {
+      if (e.getMessage() != null) {
         System.out.println(e.getMessage());
         // Tell the users that the phone numbers cannot be found now
         System.out.println("Do you want to search other restaurants? [yes / no]");
