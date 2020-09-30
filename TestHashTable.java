@@ -14,7 +14,7 @@ public class TestHashTable {
      * @return true if all tests pass
      */
     public static boolean test1() {
-        HashTableMap<String,String> trial1 = new HashTableMap();
+        RestaurantHashTableMap<String,String> trial1 = new RestaurantHashTableMap();
         if(trial1.size() != 0){
             return false;
         }
@@ -40,7 +40,7 @@ public class TestHashTable {
      * @return true if all tests pass
      */
     public static boolean test2() {
-        HashTableMap<String,String> trial2 = new HashTableMap();
+    	RestaurantHashTableMap<String,String> trial2 = new RestaurantHashTableMap();
         trial2.put("Hello", "World");
         trial2.put("Hi","Back");
         if(!(trial2.remove("Hi").equals("Back")) || (trial2.size() != 1)){
@@ -60,7 +60,7 @@ public class TestHashTable {
      * @return true if all tests pass
      */
     public static boolean test3() {
-        HashTableMap<String,String> trial3 = new HashTableMap();
+    	RestaurantHashTableMap<String,String> trial3 = new RestaurantHashTableMap();
         trial3.put("Hello", "World");
         trial3.put("Hi","Back");
         trial3.put("Hi","Again");
@@ -76,7 +76,7 @@ public class TestHashTable {
      * @return true if all tests pass
      */
     public static boolean test4() {
-        HashTableMap<String,String> trial4 = new HashTableMap();
+    	RestaurantHashTableMap<String,String> trial4 = new RestaurantHashTableMap();
         trial4.put("FB","Football");
         trial4.put("Ea","Sports");
 
@@ -101,7 +101,7 @@ public class TestHashTable {
      * @return true if all tests pass
      */
     public static boolean test5() {
-        HashTableMap<String,String> trial5 = new HashTableMap(3);
+    	RestaurantHashTableMap<String,String> trial5 = new RestaurantHashTableMap(3);
         trial5.put("A", "a");
         trial5.put("B","b");
         trial5.put("C","c");
@@ -124,9 +124,9 @@ public class TestHashTable {
      * @return true if all tests pass, otherwise false and prints test that failed.
      */
     public static boolean csvFileTests() {
-        HashTableMap<String,String> csvHashMap = new ReadData().hashMap;
+    	RestaurantHashTableMap<String,String> csvHashMap = new ReadData().restaurantHashMap;
         //1. Tests containsKey for 1st, last and random keys in file
-        if(!(csvHashMap.containsKey("1362543")) || !(csvHashMap.containsKey("1377415")) || !(csvHashMap.containsKey("9215392"))){
+        if(!(csvHashMap.containsKey("6081362543")) || !(csvHashMap.containsKey("6081377415")) || !(csvHashMap.containsKey("6089215392"))){
             System.out.println("CSVFileTests 1 Failed.");
             return false;
         }
@@ -141,36 +141,36 @@ public class TestHashTable {
             return false;
         }
         //4. Tests get
-        if(!(csvHashMap.get("1362543").equals("Freddy's Seafood")) || !(csvHashMap.get("7693961").equals("Meat U There")) || !(csvHashMap.get("9215392").equals("Atomic Sushi"))){
+        if(!(csvHashMap.get("6081362543").equals("Freddy's Seafood")) || !(csvHashMap.get("6087693961").equals("Meat U There")) || !(csvHashMap.get("6089215392").equals("Atomic Sushi"))){
             System.out.println("CSVFileTests 4 Failed.");
             return false;
         }
         //5. Tests remove
-        if(!csvHashMap.remove("1362543").equals("Freddy's Seafood") || (csvHashMap.size() != 49)){
+        if(!csvHashMap.remove("6081362543").equals("Freddy's Seafood") || (csvHashMap.size() != 49)){
             System.out.println("CSVFileTests 5 Failed.");
             return false;
         }
-        if(!csvHashMap.remove("7693961").equals("Meat U There") || (csvHashMap.size() != 48)){
+        if(!csvHashMap.remove("6087693961").equals("Meat U There") || (csvHashMap.size() != 48)){
             System.out.println("CSVFileTests 5 Failed.");
             return false;
         }
-        if(!csvHashMap.remove("9215392").equals("Atomic Sushi") || (csvHashMap.size() != 47)){
+        if(!csvHashMap.remove("6089215392").equals("Atomic Sushi") || (csvHashMap.size() != 47)){
             System.out.println("CSVFileTests 5 Failed.");
             return false;
         }
         //6. Tests colliding keys
-        if(csvHashMap.put("4285431", "Duplicate")){
+        if(csvHashMap.put("6084285431", "Duplicate")){
             System.out.println("CSVFileTests 6 Failed.");
             return false;
         }
         //7. Tests collisions
-        if(!(csvHashMap.get("5638293").equals("BBQ Express")) || !(csvHashMap.get("9516413").equals("Flavoroso"))){
+        if(!(csvHashMap.get("6085638293").equals("BBQ Express")) || !(csvHashMap.get("6089516413").equals("Flavoroso"))){
             System.out.println("CSVFileTests 7 Failed.");
             return false;
         }
         //8. Tests clear method
         csvHashMap.clear();
-        if((csvHashMap.size() != 0) || csvHashMap.containsKey("9516413")){
+        if((csvHashMap.size() != 0) || csvHashMap.containsKey("6089516413")){
             System.out.println("CSVFileTests 8 Failed.");
             return false;
         }
