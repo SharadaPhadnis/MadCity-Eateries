@@ -21,7 +21,7 @@ import java.util.List;
  *
  */
 public class ReadData {	
-	public HashTableMap hashMap = new HashTableMap(); // create a new object of HashTableMap used to store all data
+	public RestaurantHashTableMap restaurantHashMap = new RestaurantHashTableMap(); // create a new object of HashTableMap used to store all data
 	public final String delimiter = ",";
 	
 	/**
@@ -85,14 +85,8 @@ public class ReadData {
 			String number = restaurants.get(i)[1].replace('"', ' ');
 			// use .trim() to delete unwanted white space
 			number = number.trim();
-			// since all restaurants are at Madison and have phone numbers start with (608).
-			// and each phone number is unique, so the last 7-digit of these phone numbers will still be unique
-			// So, we only use the last 7-digit as each restaurant's key
-			number = number.substring(3);
-			// get the phone number from String to long
-			long phone_number = Long.parseLong(number);
 			// use put method to store the restaurant into the hash table
-			hashMap.put(phone_number, name);
+			restaurantHashMap.put(number, name);
 		}	
 	}
 		
