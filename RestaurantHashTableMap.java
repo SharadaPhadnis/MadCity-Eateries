@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
 public class RestaurantHashTableMap<K, V> extends HashTableMap {
 	private int capacity;
 	private int size;
-	private LinkedList[] list;
+	private LinkedList<RestaurantPair>[] list;
 	
 	//default constructor
 	public RestaurantHashTableMap() {
