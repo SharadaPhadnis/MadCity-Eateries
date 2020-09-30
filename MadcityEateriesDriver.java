@@ -49,8 +49,8 @@ public class MadcityEateriesDriver {
         while (!command.contentEquals("no")) {
           System.out.println("Enter the phone numbers of the restaurant you want to search: ");
           command = scanner.nextLine().trim(); // get the key of the hashtable from the users
-          if (getData.hashMap.get(command) != null) {
-            System.out.println("Your restaurant name is: " + getData.hashMap.get(command));
+          if (getData.restaurantHashMap.get(command) != null) {
+            System.out.println("Your restaurant name is: " + getData.restaurantHashMap.get(command));
           } // use the get() method in hashTableMap and output the correct restaurant's name
           System.out.println("Do you want to search other restaurants? [yes / no]");
           command = scanner.nextLine().trim(); // Ask users if they would like to continue searching
